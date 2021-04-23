@@ -1,4 +1,4 @@
-# Author: <Your name>
+# Author: <Ty Wenrick>
 # Assignment #6 - Battleship
 # Date due: 2021-05-06
 # I pledge that I have completed this assignment without
@@ -35,12 +35,12 @@ def get_random_position():
     """Generates a random location on a board of NUM_ROWS x NUM_COLS."""
 
     row_choice = chr(
-                    random.choice(
-                        range(
-                            ord(MIN_ROW_LABEL),
-                            ord(MIN_ROW_LABEL) + NUM_ROWS
-                        )
-                    )
+        random.choice(
+            range(
+                ord(MIN_ROW_LABEL),
+                ord(MIN_ROW_LABEL) + NUM_ROWS
+            )
+        )
     )
 
     col_choice = random.randint(0, NUM_COLS - 1)
@@ -74,21 +74,32 @@ def play_battleship():
 
     print("Goodbye.")
 
+
 ### DO NOT EDIT ABOVE (with the exception of MAX_MISSES) ###
 
 
 class Ship:
 
-    pass
+    def __init__(self, name, start_position, orientation):
+        """Creates a new ship with the given name, placed at start_position in the
+        provided orientation. The number of positions occupied by the ship is determined
+        by looking up the name in the SHIP_SIZE dictionary.
+
+        :param name: the name of the ship
+        :param start_position: tuple representing the starting position of ship on the board
+        :param orientation: the orientation of the ship ('v' - vertical, 'h' - horizontal)
+        :return: None
+        """
+        self.name = name
+        self.start_position = start_position
+        self.orientation = orientation
 
 
 class Game:
-
     ########## DO NOT EDIT #########
-    
+
     _ship_types = ["carrier", "battleship", "cruiser", "submarine", "destroyer"]
-    
-    
+
     def display_board(self):
         """ Displays the current state of the board."""
 
@@ -109,8 +120,12 @@ def end_program():
 
     :return response: boolean indicating whether to end the program
     """
-
-    pass
+    while True:
+        play_again = input("Play again (Y/N)? ")
+        if play_again == 'Y' or play_again == 'y':
+            return False
+        if play_again == 'N' or play_again == 'n':
+            return True
 
 
 def main():
