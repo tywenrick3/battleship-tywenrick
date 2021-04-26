@@ -88,7 +88,7 @@ def get_key(val, my_dict):
 
 class Ship:
 
-    def __init__(self, name, start_position, orientation):
+    def __init__(self, name, start_position, orientation, sunk=False):
         """Creates a new ship with the given name, placed at start_position in the
         provided orientation. The number of positions occupied by the ship is determined
         by looking up the name in the SHIP_SIZE dictionary.
@@ -98,12 +98,22 @@ class Ship:
         :param orientation: the orientation of the ship ('v' - vertical, 'h' - horizontal)
         :return: None
         """
-        val = SHIP_SIZES[name]
-        self.name = get_key(val, SHIP_SIZES)
+        self.size = SHIP_SIZES[name]
+        self.name = get_key(self.size, SHIP_SIZES)
         self.start_position = start_position
+        self.sunk = False
         self.orientation = orientation
-        sunk = False
-
+        self.positions = {}
+        row = start_position[0]
+        col = start_position[1]
+        if self.orientation == VERTICAL:
+            self.positions[start_position] = False
+            for i in range(self.size):
+                self.positions[(i, col)] = False
+        if self.orientation == HORIZONTAL:
+            self.positions[start_position] = False
+            for i in range(self.size):
+                self.positions[row, i] = False
 
 class Game:
     ########## DO NOT EDIT #########
