@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="165e6299-e8de-4bdc-87ce-06141222d34c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/battleship.py" beforeDir="false" afterPath="$PROJECT_DIR$/battleship.py" afterDir="false" />
-    </list>
+    <list default="true" id="165e6299-e8de-4bdc-87ce-06141222d34c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,6 +67,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="Ship class edit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ship class edit" />
+    <MESSAGE value="Ship class init" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ship class init" />
   </component>
 </project>

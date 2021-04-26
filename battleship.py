@@ -107,11 +107,9 @@ class Ship:
         row = start_position[0]
         col = start_position[1]
         if self.orientation == VERTICAL:
-            self.positions[start_position] = False
             for i in range(self.size):
                 self.positions[(i, col)] = False
         if self.orientation == HORIZONTAL:
-            self.positions[start_position] = False
             for i in range(self.size):
                 self.positions[row, i] = False
 
