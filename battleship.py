@@ -78,6 +78,14 @@ def play_battleship():
 ### DO NOT EDIT ABOVE (with the exception of MAX_MISSES) ###
 
 
+def get_key(val, my_dict):
+    for key, value in my_dict.items():
+        if val == value:
+            return key
+
+    return "key doesn't exist"
+
+
 class Ship:
 
     def __init__(self, name, start_position, orientation):
@@ -90,9 +98,11 @@ class Ship:
         :param orientation: the orientation of the ship ('v' - vertical, 'h' - horizontal)
         :return: None
         """
-        self.name = name
+        val = SHIP_SIZES[name]
+        self.name = get_key(val, SHIP_SIZES)
         self.start_position = start_position
         self.orientation = orientation
+        sunk = False
 
 
 class Game:
