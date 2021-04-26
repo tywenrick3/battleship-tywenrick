@@ -99,19 +99,21 @@ class Ship:
         :return: None
         """
         self.size = SHIP_SIZES[name]
-        self.name = get_key(self.size, SHIP_SIZES)
+        self.name = name
         self.start_position = start_position
         self.sunk = False
         self.orientation = orientation
         self.positions = {}
         row = start_position[0]
         col = start_position[1]
+        self.positions[start_position] = False
         if self.orientation == VERTICAL:
             for i in range(self.size):
-                self.positions[(i, col)] = False
+                self.positions[(i + 1, col)] = False
         if self.orientation == HORIZONTAL:
             for i in range(self.size):
-                self.positions[row, i] = False
+                self.positions[row, i + 1] = False
+
 
 class Game:
     ########## DO NOT EDIT #########
