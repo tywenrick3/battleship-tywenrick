@@ -77,7 +77,7 @@ def play_battleship():
 
 ### DO NOT EDIT ABOVE (with the exception of MAX_MISSES) ###
 
-
+#get a key from a dict
 def get_key(val, my_dict):
     for key, value in my_dict.items():
         if val == value:
@@ -104,15 +104,15 @@ class Ship:
         self.sunk = False
         self.orientation = orientation
         self.positions = {}
-        row = start_position[0]
-        col = start_position[1]
+        row = self.start_position[0]
+        col = self.start_position[1]
         self.positions[start_position] = False
         if self.orientation == VERTICAL:
             for i in range(self.size):
-                self.positions[(i + 1, col)] = False
+                self.positions[((chr(ord(row)+i)), col)] = False
         if self.orientation == HORIZONTAL:
             for i in range(self.size):
-                self.positions[row, i + 1] = False
+                self.positions[row, col + i] = False
 
 
 class Game:
@@ -151,8 +151,10 @@ def end_program():
 def main():
     """Executes one or more games of Battleship."""
 
-    play_battleship()
 
+    # play_battleship()
+    ship = Ship("battleship", ('F', 5), 'h')
+    print(ship.positions)
 
 if __name__ == "__main__":
     main()
