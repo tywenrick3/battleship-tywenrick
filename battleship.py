@@ -77,7 +77,7 @@ def play_battleship():
 
 ### DO NOT EDIT ABOVE (with the exception of MAX_MISSES) ###
 
-#get a key from a dict
+# get a key from a dict
 def get_key(val, my_dict):
     for key, value in my_dict.items():
         if val == value:
@@ -103,10 +103,10 @@ class Ship:
         self.start_position = start_position
         self.sunk = False
         self.orientation = orientation
-        self.positions = {}
+        self.positions = {start_position: False}
         row = self.start_position[0]
         col = self.start_position[1]
-        self.positions[start_position] = False
+
         if self.orientation == VERTICAL:
             for i in range(self.size):
                 self.positions[((chr(ord(row)+i)), col)] = False
@@ -116,6 +116,51 @@ class Ship:
 
 
 class Game:
+
+    def __init__(self, max_misses=MAX_MISSES):
+        """ Creates a new game with max_misses possible missed guesses.
+        The board is initialized in this function and ships are randomly
+        placed on the board.
+
+        :param max_misses: maximum number of misses allowed before game ends
+        """
+        self.max_misses = max_misses
+        self.guesses = []
+        self.ships = []
+        self.initialize_board()
+
+    def initialize_board(self):
+        """Sets the board to it's initial state with each position occupied by
+        a period ('.') string.
+
+        :return: None
+        """
+        self.board = {}
+        for i in range(10):
+            self.board[chr(ord(MIN_ROW_LABEL)+i)] = [".", ".", ".", ".", ".", ".", ".", ".", ".", "."]
+
+    def in_bounds(self, start_position, ship_size, orientation):
+        """Checks that a ship requiring ship_size positions can be placed at start position.
+
+        :param start_position: tuple representing the starting position of ship on the board
+        :param ship_size: number of positions needed to place ship
+        :param orientation: the orientation of the ship ('v' - vertical, 'h' - horizontal)
+        :return status: True if ship placement inside board boundary, False otherwise
+        """
+        pass
+
+    def overlaps_ship(self, start_position, ship_size, orientation):
+        """Checks for overlap between previously placed ships and a potential new ship
+        placement requiring ship_size positions beginning at start_position in the
+        given orientation.
+
+        :param start_position: tuple representing the starting position of ship on the board
+        :param ship_size: number of positions needed to place ship
+        :param orientation: the orientation of the ship ('v' - vertical, 'h' - horizontal)
+        :return status: True if ship placement overlaps previously placed ship, False otherwise
+        """
+        pass
+
     ########## DO NOT EDIT #########
 
     _ship_types = ["carrier", "battleship", "cruiser", "submarine", "destroyer"]
@@ -153,8 +198,9 @@ def main():
 
 
     # play_battleship()
-    ship = Ship("battleship", ('F', 5), 'h')
-    print(ship.positions)
+    game = Game()
+    game.display_board()
+
 
 if __name__ == "__main__":
     main()
