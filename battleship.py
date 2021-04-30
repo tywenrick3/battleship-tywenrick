@@ -77,7 +77,7 @@ def play_battleship():
 
 ### DO NOT EDIT ABOVE (with the exception of MAX_MISSES) ###
 
-# get a key from a dict
+# get a key from a dict with a value
 def get_key(val, my_dict):
     for key, value in my_dict.items():
         if val == value:
@@ -109,7 +109,7 @@ class Ship:
 
         if self.orientation == VERTICAL:
             for i in range(self.size):
-                self.positions[((chr(ord(row)+i)), col)] = False
+                self.positions[((chr(ord(row) + i)), col)] = False
         if self.orientation == HORIZONTAL:
             for i in range(self.size):
                 self.positions[row, col + i] = False
@@ -137,7 +137,7 @@ class Game:
         """
         self.board = {}
         for i in range(10):
-            self.board[chr(ord(MIN_ROW_LABEL)+i)] = [".", ".", ".", ".", ".", ".", ".", ".", ".", "."]
+            self.board[chr(ord(MIN_ROW_LABEL) + i)] = [".", ".", ".", ".", ".", ".", ".", ".", ".", "."]
 
     def in_bounds(self, start_position, ship_size, orientation):
         """Checks that a ship requiring ship_size positions can be placed at start position.
@@ -147,7 +147,21 @@ class Game:
         :param orientation: the orientation of the ship ('v' - vertical, 'h' - horizontal)
         :return status: True if ship placement inside board boundary, False otherwise
         """
-        pass
+        row = start_position[0]
+        col = start_position[1]
+        if orientation == HORIZONTAL:
+            for i in range(ship_size):
+                if col > 9:
+                    return False
+                col += 1
+        if orientation == VERTICAL:
+            for i in range(ship_size):
+                pos = ord(row)
+                if pos > ord(MAX_ROW_LABEL):
+                    return False
+                row = chr(ord(row)+1)
+
+        return True
 
     def overlaps_ship(self, start_position, ship_size, orientation):
         """Checks for overlap between previously placed ships and a potential new ship
@@ -196,10 +210,10 @@ def end_program():
 def main():
     """Executes one or more games of Battleship."""
 
-
     # play_battleship()
     game = Game()
     game.display_board()
+    print(game.in_bounds(start_position=('I', 8), ship_size=3, orientation='v'))
 
 
 if __name__ == "__main__":
