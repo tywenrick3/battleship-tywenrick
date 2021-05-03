@@ -152,6 +152,7 @@ class Game:
         """
         row = start_position[0]
         col = start_position[1]
+
         if orientation == HORIZONTAL:
             for i in range(ship_size):
                 if col > 9:
@@ -279,6 +280,24 @@ class Game:
 
         return guess_status
 
+    def update_game(self, guess_status, position):
+        """Updates the game by modifying the board with a hit or miss
+        symbol based on guess_status of position.
+
+        :param guess_status: True when position is a hit, False otherwise
+        :param position:  a (row,column) tuple guessed by user
+        :return: None
+        """
+        row = self.board[position[0]]
+
+        if position not in self.guesses:
+            if guess_status:
+                row[position[1]] = 'x'
+            elif not guess_status and row[position[1]] != 'x':
+                row[position[1]] = 'o'
+                self.guesses.append(position)
+            else:
+                self.guesses.append(position)
 
 
     ########## DO NOT EDIT #########
@@ -320,10 +339,9 @@ def main():
     game = Game()
     game.display_board()
 
-    position = ('D', 6)
-    print(game.check_guess(position))
-    print(game.check_guess(position))
-
+    game.update_game(True, ('C', 5))
+    game.update_game(False, ('C', 5))
+    game.display_board()
 
 
 if __name__ == "__main__":
