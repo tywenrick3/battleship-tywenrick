@@ -129,7 +129,7 @@ class Game:
         self.ships = []
         self.initialize_board()
 
-        self.ships.append(Ship("battleship", ("D", 3), 'h'))
+        self.ships.append(Ship("battleship", ("B", 4), 'v'))
 
     def initialize_board(self):
         """Sets the board to it's initial state with each position occupied by
@@ -179,19 +179,20 @@ class Game:
         current_position = start_position
         ship = self.ships[len(self.ships) - 1]
         positions = ship.positions
-        print(positions)
 
         if orientation == HORIZONTAL:
             for i in range(ship_size):
-                if positions[current_position]: #edit
+                if current_position in positions:
                     return True
-                current_position = (row, col + 1) # edit
+                col += 1
+                current_position = (row, col)
         if orientation == VERTICAL:
             for i in range(ship_size):
-                if positions[current_position]: #edit
+                if current_position in positions:
                     return True
                 row = chr(ord(row)+1)
-                current_position = (row, col)#edit
+                current_position = (row, col)
+
         return False
 
 
@@ -236,10 +237,10 @@ def main():
     game = Game()
     game.display_board()
 
-    pos = ('B',2)
-    size = 4
-    orient = 'v'
-    game.overlaps_ship(pos, size, orient)
+    pos = ('B', 2)
+    size = 3
+    orient = 'h'
+    print(game.overlaps_ship(pos, size, orient))
 
 
 if __name__ == "__main__":
