@@ -73,6 +73,7 @@
     <MESSAGE value="Ship class init" />
     <MESSAGE value="class Ship Init" />
     <MESSAGE value="class Game initialize_board() added" />
-    <option name="LAST_COMMIT_MESSAGE" value="class Game initialize_board() added" />
+    <MESSAGE value="added in_bounds() to game class" />
+    <option name="LAST_COMMIT_MESSAGE" value="added in_bounds() to game class" />
   </component>
 </project>

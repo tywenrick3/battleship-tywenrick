@@ -129,6 +129,8 @@ class Game:
         self.ships = []
         self.initialize_board()
 
+        self.ships.append(Ship("battleship", ("D", 3), 'h'))
+
     def initialize_board(self):
         """Sets the board to it's initial state with each position occupied by
         a period ('.') string.
@@ -160,7 +162,6 @@ class Game:
                 if pos > ord(MAX_ROW_LABEL):
                     return False
                 row = chr(ord(row)+1)
-
         return True
 
     def overlaps_ship(self, start_position, ship_size, orientation):
@@ -173,7 +174,28 @@ class Game:
         :param orientation: the orientation of the ship ('v' - vertical, 'h' - horizontal)
         :return status: True if ship placement overlaps previously placed ship, False otherwise
         """
-        pass
+        row = start_position[0]
+        col = start_position[1]
+        current_position = start_position
+        ship = self.ships[len(self.ships) - 1]
+        positions = ship.positions
+        print(positions)
+
+        if orientation == HORIZONTAL:
+            for i in range(ship_size):
+                if positions[current_position]: #edit
+                    return True
+                current_position = (row, col + 1) # edit
+        if orientation == VERTICAL:
+            for i in range(ship_size):
+                if positions[current_position]: #edit
+                    return True
+                row = chr(ord(row)+1)
+                current_position = (row, col)#edit
+        return False
+
+
+
 
     ########## DO NOT EDIT #########
 
@@ -213,7 +235,11 @@ def main():
     # play_battleship()
     game = Game()
     game.display_board()
-    print(game.in_bounds(start_position=('I', 8), ship_size=3, orientation='v'))
+
+    pos = ('B',2)
+    size = 4
+    orient = 'v'
+    game.overlaps_ship(pos, size, orient)
 
 
 if __name__ == "__main__":
