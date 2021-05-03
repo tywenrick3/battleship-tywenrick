@@ -130,6 +130,8 @@ class Game:
         self.initialize_board()
         self.create_and_place_ships()
 
+        self.ships.append(Ship('destroyer', ('D', 6), 'h'))
+
     def initialize_board(self):
         """Sets the board to it's initial state with each position occupied by
         a period ('.') string.
@@ -173,9 +175,6 @@ class Game:
         :param orientation: the orientation of the ship ('v' - vertical, 'h' - horizontal)
         :return status: True if ship placement overlaps previously placed ship, False otherwise
         """
-
-        #ship = self.ships[len(self.ships) - 1]
-        #positions = ship.positions
 
         for i in range(len(self.ships)):
             ship = self.ships[i]
@@ -234,6 +233,53 @@ class Game:
                     self.ships.append(Ship(self._ship_types[i], start_position, VERTICAL))
                     valid = True
 
+    def get_guess(self):
+        """Prompts the user for a row and column to attack. The
+        return value is a board position in (row, column) format
+
+        :return position: a board position as a (row, column) tuple
+        """
+        valid_rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+        row_ready = False
+        col_ready = False
+        while not row_ready:
+            row = input('Enter a row: ')
+            if row in valid_rows:
+                row_ready = True
+        while not col_ready:
+            col = int(input('Enter a column: '))
+            if 0 <= col <= 9:
+                position = (row, col)
+                return position
+
+    def check_guess(self, position):
+        """Checks whether or not position is occupied by a ship. A hit is
+        registered when position occupied by a ship and position not hit
+        previously. A miss occurs otherwise.
+
+        :param position: a (row,column) tuple guessed by user
+        :return: guess_status: True when guess results in hit, False when guess results in miss
+        """
+        guess = position
+        guess_status = False
+        sunk = True
+        for i in range(len(self.ships)):
+            ship = self.ships[i]
+            positions = ship.positions
+            name = ship.name
+            if guess in positions and not positions[guess]:
+                guess_status = True
+                positions[guess] = True
+            for key in positions:
+                if not positions[key]:
+                    sunk = False
+            if sunk:
+                print('You sunk the ' + name + '!')
+                ship.sunk = True
+
+        return guess_status
+
+
 
     ########## DO NOT EDIT #########
 
@@ -274,7 +320,10 @@ def main():
     game = Game()
     game.display_board()
 
-    print(game.create_and_place_ships())
+    position = ('D', 6)
+    print(game.check_guess(position))
+    print(game.check_guess(position))
+
 
 
 if __name__ == "__main__":
