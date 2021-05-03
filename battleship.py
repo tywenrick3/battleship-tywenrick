@@ -128,8 +128,7 @@ class Game:
         self.guesses = []
         self.ships = []
         self.initialize_board()
-
-        self.ships.append(Ship("battleship", ("B", 4), 'v'))
+        self.create_and_place_ships()
 
     def initialize_board(self):
         """Sets the board to it's initial state with each position occupied by
@@ -174,27 +173,56 @@ class Game:
         :param orientation: the orientation of the ship ('v' - vertical, 'h' - horizontal)
         :return status: True if ship placement overlaps previously placed ship, False otherwise
         """
-        row = start_position[0]
-        col = start_position[1]
-        current_position = start_position
-        ship = self.ships[len(self.ships) - 1]
-        positions = ship.positions
 
-        if orientation == HORIZONTAL:
-            for i in range(ship_size):
-                if current_position in positions:
-                    return True
-                col += 1
-                current_position = (row, col)
-        if orientation == VERTICAL:
-            for i in range(ship_size):
-                if current_position in positions:
-                    return True
-                row = chr(ord(row)+1)
-                current_position = (row, col)
+        #ship = self.ships[len(self.ships) - 1]
+        #positions = ship.positions
+
+        for i in range(len(self.ships)):
+            ship = self.ships[i]
+            positions = ship.positions
+            row = start_position[0]
+            col = start_position[1]
+            current_position = start_position
+
+            if orientation == HORIZONTAL:
+                for j in range(ship_size):
+                    if current_position in positions:
+                        return True
+                    col += 1
+                    current_position = (row, col)
+            if orientation == VERTICAL:
+                for j in range(ship_size):
+                    if current_position in positions:
+                        return True
+                    row = chr(ord(row)+1)
+                    current_position = (row, col)
 
         return False
 
+    def place_ship(self, start_position, ship_size):
+        """Determines if placement is possible for ship requiring ship_size positions placed at
+        start_position. Returns the orientation where placement is possible or None if no placement
+        in either orientation is possible.
+
+        :param start_position: tuple representing the starting position of ship on the board
+        :param ship_size: number of positions needed to place ship
+        :return orientation: 'h' if horizontal placement possible, 'v' if vertical placement possible,
+            None if no placement possible
+        """
+
+        if self.in_bounds(start_position, ship_size, HORIZONTAL) and not self.overlaps_ship(start_position, ship_size, HORIZONTAL):
+            return HORIZONTAL
+        elif self.in_bounds(start_position, ship_size, VERTICAL) and not self.overlaps_ship(start_position, ship_size, VERTICAL):
+            return VERTICAL
+        else:
+            return None
+
+    def create_and_place_ships(self):
+        """Instantiates ship objects with valid board placements.
+
+        :return: None
+        """
+        start_position = get_random_position()
 
 
 
@@ -237,10 +265,7 @@ def main():
     game = Game()
     game.display_board()
 
-    pos = ('B', 2)
-    size = 3
-    orient = 'h'
-    print(game.overlaps_ship(pos, size, orient))
+    print(game.create_and_place_ships())
 
 
 if __name__ == "__main__":
