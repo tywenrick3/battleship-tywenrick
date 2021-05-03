@@ -289,7 +289,6 @@ class Game:
         :return: None
         """
         row = self.board[position[0]]
-
         if position not in self.guesses:
             if guess_status:
                 row[position[1]] = 'x'
@@ -299,6 +298,31 @@ class Game:
             else:
                 self.guesses.append(position)
 
+    def is_complete(self):
+        """Checks to see if a Battleship game has ended. Returns True when the game is complete
+        with a message indicating whether the game ended due to successfully sinking all ships
+        or reaching the maximum number of guesses. Returns False when the game is not
+        complete.
+
+        :return: True on game completion, False otherwise
+        """
+        if len(self.guesses) >= MAX_MISSES:
+            print('SORRY! NO GUESSES LEFT.')
+            return True
+
+        all_sunk = False
+        for i in range(len(self.ships)):
+            ship = self.ships[i]
+            if ship.sunk:
+                all_sunk = True
+            else:
+                all_sunk = False
+
+        if all_sunk:
+            print('YOU WIN!')
+            return True
+
+        return False
 
     ########## DO NOT EDIT #########
 
@@ -335,13 +359,8 @@ def end_program():
 def main():
     """Executes one or more games of Battleship."""
 
-    # play_battleship()
-    game = Game()
-    game.display_board()
+    play_battleship()
 
-    game.update_game(True, ('C', 5))
-    game.update_game(False, ('C', 5))
-    game.display_board()
 
 
 if __name__ == "__main__":

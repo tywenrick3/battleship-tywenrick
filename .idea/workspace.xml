@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="165e6299-e8de-4bdc-87ce-06141222d34c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/battleship.py" beforeDir="false" afterPath="$PROJECT_DIR$/battleship.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,6 +77,7 @@
     <MESSAGE value="added place_ship() to game class" />
     <MESSAGE value="added create_and_place_ships() to game class" />
     <MESSAGE value="added check_guess() to game class" />
-    <option name="LAST_COMMIT_MESSAGE" value="added check_guess() to game class" />
+    <MESSAGE value="added update_game() to game class" />
+    <option name="LAST_COMMIT_MESSAGE" value="added update_game() to game class" />
   </component>
 </project>
