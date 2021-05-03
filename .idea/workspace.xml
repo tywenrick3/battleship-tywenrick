@@ -75,6 +75,7 @@
     <MESSAGE value="class Game initialize_board() added" />
     <MESSAGE value="added in_bounds() to game class" />
     <MESSAGE value="added overlaps_ship() to game class" />
-    <option name="LAST_COMMIT_MESSAGE" value="added overlaps_ship() to game class" />
+    <MESSAGE value="added place_ship() to game class" />
+    <option name="LAST_COMMIT_MESSAGE" value="added place_ship() to game class" />
   </component>
 </project>

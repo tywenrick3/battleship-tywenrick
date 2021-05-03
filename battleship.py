@@ -222,8 +222,17 @@ class Game:
 
         :return: None
         """
-        start_position = get_random_position()
-
+        for i in range(len(self._ship_types)):
+            valid = False
+            while not valid:
+                start_position = get_random_position()
+                size = SHIP_SIZES[self._ship_types[i]]
+                if self.place_ship(start_position, size) == HORIZONTAL:
+                    self.ships.append(Ship(self._ship_types[i], start_position, HORIZONTAL))
+                    valid = True
+                elif self.place_ship(start_position, size) == VERTICAL:
+                    self.ships.append(Ship(self._ship_types[i], start_position, VERTICAL))
+                    valid = True
 
 
     ########## DO NOT EDIT #########
