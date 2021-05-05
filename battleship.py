@@ -248,10 +248,18 @@ class Game:
             if row in valid_rows:
                 row_ready = True
         while not col_ready:
-            col = int(input('Enter a column: '))
-            if 0 <= col <= 9:
-                position = (row, col)
-                return position
+            # this try statement is use to fix a bug where if the col input was empty the program would throw an error
+            try:
+                col = input('Enter a column: ')
+            except ValueError:
+                col_ready = False
+                break
+            finally:
+                if len(col) > 0:
+                    col = int(col)
+                    if 0 <= col <= 9:
+                        position = (row, col)
+                        return position
 
     def check_guess(self, position):
         """Checks whether or not position is occupied by a ship. A hit is
